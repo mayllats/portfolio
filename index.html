@@ -3,24 +3,1114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Maylla Souza — Portfolio 2026</title>
+<title>Maylla Souza — Product Design Portfolio</title>
 <style>
-  html,body{ margin:0; padding:0; height:100%; background:#0a0d1f; }
-  embed, iframe{ width:100%; height:100%; border:none; display:block; }
-  .fallback{
-    position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    color:#fff; font-family:Arial, sans-serif; text-align:center; padding:24px;
+  :root{
+    --bg-deep:   #0a0d1f;
+    --bg-mid1:   #181c44;
+    --bg-mid2:   #2c2877;
+    --bg-violet: #4b3fea;
+    --accent:    #4b3fea;
+    --accent-soft:#7a6ff5;
+    --ink:       #11131c;
+    --ink-soft:  #54566a;
+    --ink-faint: #8d8fa3;
+    --paper:     #f6f6fb;
+    --card:      #ffffff;
+    --line:      #e4e4ef;
+    --mint:      #0e9b66;
+    --mint-bg:   #e3f6ec;
+
+    --font-display:'Poppins', 'Liberation Sans', sans-serif;
+    --font-body:'Liberation Sans', Arial, sans-serif;
+    --font-mono:'DejaVu Sans Mono', 'Liberation Mono', monospace;
+
+    --maxw: 920px;
   }
-  .fallback a{ color:#fff; background:#4b3fea; padding:12px 24px; border-radius:30px; text-decoration:none; margin-top:16px; font-size:14px; }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:var(--font-body); color:var(--ink); background:var(--paper); overflow-x:hidden; }
+  a{ color:inherit; }
+  img{ max-width:100%; }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  section{ position:relative; }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,13,31,0.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:0 28px;
+    min-height:60px; display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:nowrap;
+  }
+  .nav-mark{
+    font-family:var(--font-display); font-weight:700; font-size:15px; color:#fff;
+    letter-spacing:0.3px; white-space:nowrap;
+  }
+  .nav-links{ display:flex; align-items:center; gap:26px; }
+  .nav-links a{
+    color:rgba(255,255,255,0.68); text-decoration:none; font-size:13px;
+    position:relative; padding:4px 0; transition:color .2s ease;
+    white-space:nowrap;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--accent-soft); transition:width .25s ease;
+  }
+  .nav-links a:hover{ color:#fff; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    color:#fff; background:var(--accent); padding:8px 16px; border-radius:30px;
+    text-decoration:none; transition:background .2s ease, transform .2s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{ background:var(--accent-soft); transform:translateY(-1px); }
+  .nav-links-mobile-hide{ display:flex; gap:26px; }
+  @media (max-width:680px){
+    .nav-mark{ font-size:12.5px; }
+    .nav-links{ gap:12px; }
+    .nav-links-mobile-hide{ display:none !important; }
+    .nav-cta{ font-size:9.5px; padding:7px 12px; }
+  }
+
+  /* ---------- typography helpers ---------- */
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .on-dark .eyebrow{ color:rgba(255,255,255,0.65); }
+
+  .pill-eyebrow{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.85);
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:30px;
+    padding:6px 16px;
+  }
+
+  h1,h2,h3{ font-family:var(--font-display); margin:0; }
+
+  .tag-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .tag{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.5px;
+    color:var(--accent);
+    background:#efedfd;
+    border-radius:30px;
+    padding:6px 13px;
+    transition:background .2s ease, transform .2s ease, color .2s ease;
+  }
+  .tag:hover{ background:var(--accent); color:#fff; transform:translateY(-2px); }
+
+  .contact-pill{
+    font-size:12px; color:rgba(255,255,255,0.85); text-decoration:none;
+    border:1px solid rgba(255,255,255,0.3); border-radius:30px; padding:8px 16px;
+    transition:background .2s ease, border-color .2s ease, transform .2s ease;
+    display:inline-block;
+  }
+  .contact-pill:hover{ background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.6); transform:translateY(-2px); }
+
+  /* ---------- process track ---------- */
+  .process-track{ display:flex; align-items:center; gap:0; margin:26px 0 34px; flex-wrap:wrap; }
+  .process-track .node{ display:flex; align-items:center; gap:9px; }
+  .process-track .dot{ width:7px; height:7px; border-radius:50%; background:var(--line); border:1px solid var(--ink-faint); }
+  .process-track .node.is-active .dot{ background:var(--accent); border-color:var(--accent); }
+  .process-track .label{ font-family:var(--font-mono); font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--ink-faint); }
+  .process-track .node.is-active .label{ color:var(--ink); }
+  .process-track .seg{ flex:1; min-width:24px; height:1px; background:var(--line); margin:0 12px; }
+  @media (max-width:680px){
+    .process-track{ gap:10px 0; }
+    .process-track .seg{ display:none; }
+    .process-track .node{ margin-right:14px; }
+    .process-track .label{ font-size:9.5px; }
+  }
+
+  /* ---------- meta / decision items ---------- */
+  .decision-item{ display:flex; gap:16px; margin-bottom:18px; padding:8px; margin-left:-8px; border-radius:10px; transition:background .2s ease; }
+  .decision-item:hover{ background:rgba(75,63,234,0.05); }
+  .decision-item .idx{ font-family:var(--font-display); font-weight:700; font-size:13px; color:var(--accent); flex:none; width:22px; }
+  .decision-item .txt{ font-size:13.3px; line-height:1.58; color:var(--ink-soft); }
+  .decision-item .txt b{ color:var(--ink); font-weight:600; }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .card:hover{ transform:translateY(-3px); box-shadow:0 14px 30px -16px rgba(30,20,90,0.25); border-color:#cfcaf7; }
+
+  /* ---------- device mockups ---------- */
+  .device{
+    position:relative; border-radius:14px;
+    background:linear-gradient(150deg,#11132a,#23234f);
+    padding:14px;
+    box-shadow:0 24px 50px -18px rgba(20,16,70,0.45);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .device:hover{ transform:translateY(-5px); box-shadow:0 30px 60px -16px rgba(20,16,70,0.55); }
+  .device .chrome-dots{ display:flex; gap:6px; margin-bottom:10px; padding-left:4px; }
+  .device .chrome-dots span{ width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.18); }
+  .device .screen{ background:#fff; border-radius:8px; overflow:hidden; height:100%; display:flex; flex-direction:column; }
+
+  .swatch{ transition:transform .2s ease; cursor:default; }
+  .swatch:hover{ transform:scale(1.05); }
+
+  /* ---------- next-case row ---------- */
+  .next-row{ display:flex; justify-content:space-between; align-items:baseline; }
+  .next-row .go{ transition:transform .2s ease; display:inline-block; }
+  .next-row:hover .go{ transform:translateX(4px); }
+
+  /* ---------- list rows (additional work / skills) ---------- */
+  .list-row{ transition:background .2s ease; border-radius:8px; }
+  .list-row:hover{ background:rgba(75,63,234,0.04); }
+
+  /* ---------- footer scroll cue ---------- */
+  .scroll-cue{
+    position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+    color:rgba(255,255,255,0.5); font-family:var(--font-mono); font-size:10px;
+    letter-spacing:2px; text-transform:uppercase; text-align:center;
+    animation:bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{ transform:translate(-50%,0); } 50%{ transform:translate(-50%,8px); } }
+  @media (prefers-reduced-motion: reduce){ .scroll-cue{ animation:none; } }
+
+  .deco-circle{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,0.14); }
+  .deco-circle::after{ content:''; position:absolute; inset:18%; border-radius:50%; background:rgba(255,255,255,0.05); }
+
+  /* ---------- responsive section paddings ---------- */
+  .sec{ padding:90px 0; }
+  .sec--tight{ padding:70px 0; }
+  @media (max-width:680px){
+    .sec{ padding:64px 0; }
+    .sec--tight{ padding:50px 0; }
+  }
+
+  .grid-2{ display:flex; gap:30px; }
+  @media (max-width:760px){
+    .grid-2{ flex-direction:column; }
+  }
+
+  .h1-hero{ font-size:clamp(40px,7vw,64px); font-weight:700; line-height:1.04; letter-spacing:-1px; }
+  .h2-sec{ font-size:clamp(26px,4vw,32px); font-weight:700; letter-spacing:-0.4px; }
+
+  footer{
+    padding:40px 0; text-align:center; color:var(--ink-faint); font-size:11px;
+    font-family:var(--font-mono); letter-spacing:1px; text-transform:uppercase;
+  }
 </style>
 </head>
 <body>
-  <embed src="Portfolio_Maylla_Souza.pdf" type="application/pdf" />
-  <noscript>
-    <div class="fallback">
-      <p>View the portfolio PDF below.</p>
-      <a href="Portfolio_Maylla_Souza.pdf">Open Portfolio</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-mark" style="text-decoration:none;">MAYLLA SOUZA</a>
+    <div class="nav-links">
+      <div class="nav-links-mobile-hide">
+        <a href="#about">About</a>
+        <a href="#arc">Arc</a>
+        <a href="#case-currency">Work</a>
+        <a href="#skills">Skills</a>
+      </div>
+      <a href="Portfolio_Maylla_Souza.pdf" class="nav-cta">Download PDF</a>
     </div>
-  </noscript>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="on-dark" style="min-height:100vh; display:flex; align-items:center; background:linear-gradient(150deg, var(--bg-deep) 0%, var(--bg-mid1) 38%, var(--bg-mid2) 68%, var(--bg-violet) 100%); color:#fff; overflow:hidden;">
+  <div class="deco-circle" style="width:300px;height:300px; top:80px; right:-70px;"></div>
+  <div class="deco-circle" style="width:170px;height:170px; top:140px; right:160px;"></div>
+  <div class="deco-circle" style="width:420px;height:420px; bottom:-200px; left:-160px;"></div>
+
+  <div class="wrap" style="padding-top:80px; padding-bottom:80px;">
+    <span class="pill-eyebrow">Portfolio — 2026</span>
+    <h1 class="h1-hero" style="margin-top:26px;">Maylla<br>Souza</h1>
+    <div style="font-family:var(--font-display); font-size:19px; font-weight:300; color:rgba(255,255,255,0.82); margin-top:18px;">
+      Product Design Consultant
+    </div>
+    <div style="width:46px; height:2px; background:var(--accent-soft); margin:26px 0;"></div>
+    <p style="font-size:14.5px; line-height:1.7; color:rgba(255,255,255,0.68); max-width:520px;">
+      10+ years designing for fintech, Banking-as-a-Service, and multi-brand White Label platforms.
+      Currently leading design system governance and hi-fi product design at a stealth startup,
+      with AI-augmented workflows for scalable execution.
+    </p>
+    <div style="display:flex; gap:14px; margin-top:36px; flex-wrap:wrap;">
+      <a href="mailto:mayllats@gmail.com" class="contact-pill">mayllats@gmail.com</a>
+      <a href="https://linkedin.com/in/mayllasouza" class="contact-pill">linkedin.com/in/mayllasouza</a>
+      <a href="https://behance.net/mayllats" class="contact-pill">behance.net/mayllats</a>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-cue" aria-label="Scroll to content">Scroll ↓</a>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="sec">
+  <div class="wrap reveal">
+    <span class="eyebrow">About</span>
+    <h2 style="font-size:clamp(28px,5vw,38px); font-weight:700; letter-spacing:-0.5px; line-height:1.18; margin-top:16px; max-width:600px;">
+      Designing for complexity, at scale.
+    </h2>
+
+    <p style="font-size:14.5px; line-height:1.75; color:var(--ink-soft); max-width:600px; margin-top:26px;">
+      I design digital products with a strict focus on business strategy, agile delivery, and
+      data-driven decisions. Over more than a decade, I've specialized in solving complex
+      architecture and interface problems across fintech, Banking-as-a-Service, multi-brand
+      White Label ecosystems, and enterprise SaaS.
+    </p>
+    <p style="font-size:14.5px; line-height:1.75; color:var(--ink-soft); max-width:600px; margin-top:14px;">
+      My approach pairs a solid foundation in process and project management — backed by an
+      MBA from FGV — with hands-on team leadership and global design system governance. I use
+      an agile mindset to align complex stakeholders and keep delivery efficient, today
+      augmented by AI-powered design workflows.
+    </p>
+
+    <div style="margin-top:50px; height:1px; background:var(--line);"></div>
+
+    <div style="display:flex; gap:24px; margin-top:38px; flex-wrap:wrap;">
+      <div class="card" style="flex:1; min-width:180px; padding:24px 22px;">
+        <div class="eyebrow">01 · Strategy</div>
+        <ul style="margin:16px 0 0; padding:0; list-style:none; font-size:12.6px; line-height:1.95; color:var(--ink-soft);">
+          <li>Design backlog management &amp; DesignOps</li>
+          <li>Stakeholder alignment &amp; C-level communication</li>
+          <li>Technical mentorship &amp; career development</li>
+          <li>Agile mindset, data-driven decisions</li>
+        </ul>
+      </div>
+      <div class="card" style="flex:1; min-width:180px; padding:24px 22px;">
+        <div class="eyebrow">02 · Product</div>
+        <ul style="margin:16px 0 0; padding:0; list-style:none; font-size:12.6px; line-height:1.95; color:var(--ink-soft);">
+          <li>Multi-brand &amp; White Label architecture</li>
+          <li>Design system governance &amp; componentization</li>
+          <li>Interaction architecture for complex flows</li>
+          <li>Research, journey mapping, usability testing</li>
+        </ul>
+      </div>
+      <div class="card" style="flex:1; min-width:180px; padding:24px 22px;">
+        <div class="eyebrow">03 · Technology</div>
+        <ul style="margin:16px 0 0; padding:0; list-style:none; font-size:12.6px; line-height:1.95; color:var(--ink-soft);">
+          <li>AI-augmented design workflows</li>
+          <li>Semantic tokens, engineering handoff</li>
+          <li>Tailwind CSS integration</li>
+          <li>Fintech, BaaS, treasury, low-code</li>
+        </ul>
+      </div>
+    </div>
+</section>
+
+<!-- ============ ARC CASE STUDY ============ -->
+<section id="arc" class="sec" style="background:var(--paper);">
+  <div class="wrap reveal">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+      <span class="eyebrow">Project 01</span>
+      <span class="eyebrow" style="color:var(--ink-faint);">Arc — 2025–2026</span>
+    </div>
+    <h2 class="h2-sec" style="margin-top:14px;">Arc Design System</h2>
+    <p style="font-size:14px; color:var(--ink-soft); margin-top:8px; max-width:580px;">
+      A multi-tenant fintech design system, built from zero — brand identity, components, and product flows, together.
+    </p>
+
+    <div class="process-track">
+      <div class="node is-active"><span class="dot"></span><span class="label">Challenge</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Process</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Decisions</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Outcome</span></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:6px;">
+      <div style="flex:1.15;">
+        <div class="eyebrow" style="color:var(--ink-faint);">Challenge</div>
+        <p style="font-size:13.4px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          Arc launched with no visual identity, no component library, and no established design
+          language. The product itself was still being defined — PRDs arrived in iterations, and
+          every foundational choice had to hold up across a scope that kept expanding, as the sole
+          designer responsible for brand, system, and product at once.
+        </p>
+
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:22px;">Process</div>
+        <p style="font-size:13.4px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          I architected the system for multi-tenant deployment from day one — separating the token
+          layer from component logic, and organizing everything into Global, Player-facing, and
+          Admin layers, each independently skinnable.
+        </p>
+
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:22px;">Key decisions</div>
+        <div style="margin-top:14px;">
+          <div class="decision-item">
+            <div class="idx">01</div>
+            <div class="txt"><b>Token-based theming, not duplication</b> — a new operator rebrands through a token swap, never a component rebuild.</div>
+          </div>
+          <div class="decision-item">
+            <div class="idx">02</div>
+            <div class="txt"><b>Claude as a technical execution partner,</b> used directly through the Figma MCP connector for component architecture decisions and plugin-driven design system work — not just early ideation.</div>
+          </div>
+          <div class="decision-item">
+            <div class="idx">03</div>
+            <div class="txt"><b>Evolution treated as part of the system,</b> not a failure of v1 — three refactor passes before calling the foundation stable.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:0 0 270px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="card" style="padding:16px;">
+            <div style="font-family:var(--font-display); font-size:25px; font-weight:700; color:var(--accent);">97</div>
+            <div style="font-size:10px; color:var(--ink-soft); line-height:1.4; margin-top:5px;">Published components — Global, Player &amp; Admin</div>
+          </div>
+          <div class="card" style="padding:16px;">
+            <div style="font-family:var(--font-display); font-size:25px; font-weight:700; color:var(--accent);">288</div>
+            <div style="font-size:10px; color:var(--ink-soft); line-height:1.4; margin-top:5px;">Component swaps in one evolution sprint</div>
+          </div>
+          <div class="card" style="padding:16px;">
+            <div style="font-family:var(--font-display); font-size:25px; font-weight:700; color:var(--accent);">10+</div>
+            <div style="font-size:10px; color:var(--ink-soft); line-height:1.4; margin-top:5px;">Product pages with full PRD coverage</div>
+          </div>
+          <div class="card" style="padding:16px;">
+            <div style="font-family:var(--font-display); font-size:12.5px; font-weight:700; color:var(--accent); line-height:1.3;">Figma →<br>Storybook</div>
+            <div style="font-size:10px; color:var(--ink-soft); line-height:1.4; margin-top:5px;">Chromatic visual regression pipeline</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <div class="eyebrow" style="color:var(--ink-faint);">Outcome</div>
+          <p style="font-size:12px; line-height:1.6; color:var(--ink-soft); margin-top:8px;">
+            What started as a brand kit became a governed, multi-tenant design system — proof
+            that early architecture decisions can still flex months later without breaking.
+          </p>
+        </div>
+
+        <div class="tag-row" style="margin-top:16px;">
+          <span class="tag">Design Systems</span>
+          <span class="tag">AI-Augmented Workflow</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand identity continuation -->
+    <div style="margin-top:60px;">
+      <div class="eyebrow" style="color:var(--ink-faint);">Brand identity, in service of a system</div>
+      <p style="font-size:13px; color:var(--ink-soft); margin-top:8px; max-width:580px;">
+        Visual language built for clarity, confidence, and multi-context application.
+      </p>
+      <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
+        <div class="swatch" style="flex:1; min-width:80px;">
+          <div style="height:54px; border-radius:8px; background:#0D0856;"></div>
+          <div style="font-size:9.5px; font-family:var(--font-mono); margin-top:6px; color:var(--ink);">#0D0856</div>
+          <div style="font-size:10px; color:var(--ink-faint);">Indigo Dark</div>
+        </div>
+        <div class="swatch" style="flex:1; min-width:80px;">
+          <div style="height:54px; border-radius:8px; background:#6C7AFF;"></div>
+          <div style="font-size:9.5px; font-family:var(--font-mono); margin-top:6px; color:var(--ink);">#6C7AFF</div>
+          <div style="font-size:10px; color:var(--ink-faint);">Accent Blue</div>
+        </div>
+        <div class="swatch" style="flex:1; min-width:80px;">
+          <div style="height:54px; border-radius:8px; background:#CDD0FF;"></div>
+          <div style="font-size:9.5px; font-family:var(--font-mono); margin-top:6px; color:var(--ink);">#CDD0FF</div>
+          <div style="font-size:10px; color:var(--ink-faint);">Indigo Light</div>
+        </div>
+        <div class="swatch" style="flex:1; min-width:80px;">
+          <div style="height:54px; border-radius:8px; background:#FFFFFF; border:1px solid var(--line);"></div>
+          <div style="font-size:9.5px; font-family:var(--font-mono); margin-top:6px; color:var(--ink);">#FFFFFF</div>
+          <div style="font-size:10px; color:var(--ink-faint);">White</div>
+        </div>
+        <div class="swatch" style="flex:1; min-width:80px;">
+          <div style="height:54px; border-radius:8px; background:#0D0014;"></div>
+          <div style="font-size:9.5px; font-family:var(--font-mono); margin-top:6px; color:var(--ink);">#0D0014</div>
+          <div style="font-size:10px; color:var(--ink-faint);">Near Black</div>
+        </div>
+        <div class="swatch" style="flex:1; min-width:80px;">
+          <div style="height:54px; border-radius:8px; background:#D91A1A;"></div>
+          <div style="font-size:9.5px; font-family:var(--font-mono); margin-top:6px; color:var(--ink);">#D91A1A</div>
+          <div style="font-size:10px; color:var(--ink-faint);">Red Accent</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:50px;">
+      <div class="eyebrow" style="color:var(--ink-faint);">Selected screens — Onboarding · Trading · Portfolio · Support</div>
+      <div style="display:flex; gap:14px; margin-top:16px; flex-wrap:wrap;">
+        <div class="device" style="flex:1; min-width:130px;">
+          <div class="screen" style="height:148px; padding:8px; display:flex; flex-direction:column; gap:5px;">
+            <div style="height:6px; width:60%; background:var(--paper); border-radius:3px;"></div>
+            <div style="height:24px; background:#efedfd; border-radius:5px; margin-top:3px;"></div>
+            <div style="height:6px; width:80%; background:var(--paper); border-radius:3px;"></div>
+            <div style="height:6px; width:50%; background:var(--paper); border-radius:3px;"></div>
+            <div style="flex:1; background:var(--paper); border-radius:5px; margin-top:3px;"></div>
+          </div>
+          <div style="text-align:center; font-size:9px; color:rgba(255,255,255,0.6); margin-top:7px;">Onboarding</div>
+        </div>
+        <div class="device" style="flex:1; min-width:130px;">
+          <div class="screen" style="height:148px; padding:8px; display:flex; flex-direction:column; gap:5px;">
+            <div style="height:6px; width:50%; background:var(--paper); border-radius:3px;"></div>
+            <svg viewBox="0 0 100 40" style="width:100%; height:40px; margin-top:3px;"><polyline points="0,32 20,24 40,28 60,12 80,18 100,6" fill="none" stroke="#6C7AFF" stroke-width="3"/></svg>
+            <div style="height:18px; background:#e3f6ec; border-radius:5px;"></div>
+            <div style="height:18px; background:var(--paper); border-radius:5px;"></div>
+            <div style="flex:1; background:var(--paper); border-radius:5px;"></div>
+          </div>
+          <div style="text-align:center; font-size:9px; color:rgba(255,255,255,0.6); margin-top:7px;">Trading</div>
+        </div>
+        <div class="device" style="flex:1; min-width:130px;">
+          <div class="screen" style="height:148px; padding:8px; display:flex; flex-direction:column; gap:5px;">
+            <div style="height:30px; background:#0D0856; border-radius:5px;"></div>
+            <div style="height:6px; width:70%; background:var(--paper); border-radius:3px; margin-top:3px;"></div>
+            <div style="height:14px; background:var(--paper); border-radius:4px;"></div>
+            <div style="height:14px; background:var(--paper); border-radius:4px;"></div>
+            <div style="flex:1; background:var(--paper); border-radius:5px;"></div>
+          </div>
+          <div style="text-align:center; font-size:9px; color:rgba(255,255,255,0.6); margin-top:7px;">Portfolio</div>
+        </div>
+        <div class="device" style="flex:1; min-width:130px;">
+          <div class="screen" style="height:148px; padding:8px; display:flex; flex-direction:column; gap:5px;">
+            <div style="height:6px; width:55%; background:var(--paper); border-radius:3px;"></div>
+            <div style="align-self:flex-start; max-width:75%; background:var(--paper); border-radius:8px; padding:5px 7px; font-size:6px; color:var(--ink-faint); margin-top:4px;">How can I help?</div>
+            <div style="align-self:flex-end; max-width:75%; background:#6C7AFF; border-radius:8px; padding:5px 7px; font-size:6px; color:#fff;">Deposit issue</div>
+            <div style="flex:1; background:var(--paper); border-radius:5px; margin-top:3px;"></div>
+          </div>
+          <div style="text-align:center; font-size:9px; color:rgba(255,255,255,0.6); margin-top:7px;">Support</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:50px;">
+      <div style="flex:1.2;">
+        <div class="eyebrow" style="color:var(--ink-faint);">Component showcase</div>
+        <p style="font-size:12.5px; color:var(--ink-soft); margin-top:10px; line-height:1.65;">
+          30+ components across 7 categories, built for a scalable, multi-layer system.
+        </p>
+        <div class="tag-row" style="margin-top:12px;">
+          <span class="tag">EventCard</span>
+          <span class="tag">LiveGameCard</span>
+          <span class="tag">PositionCard</span>
+          <span class="tag">OrderCard</span>
+          <span class="tag">CardHistoryActivities</span>
+        </div>
+      </div>
+      <div style="flex:1;">
+        <div class="eyebrow" style="color:var(--ink-faint);">Built with</div>
+        <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
+          <div style="font-size:12px;"><b>Figma</b> <span style="color:var(--ink-faint);">— component architecture &amp; tokens</span></div>
+          <div style="font-size:12px;"><b>Storybook</b> <span style="color:var(--ink-faint);">— documentation &amp; dev handoff</span></div>
+          <div style="font-size:12px;"><b>ClickUp</b> <span style="color:var(--ink-faint);">— DS backlog &amp; gap tracking</span></div>
+          <div style="font-size:12px; background:#efedfd; border-radius:6px; padding:5px 8px; display:inline-block;"><b style="color:var(--accent);">Claude</b> <span style="color:var(--ink-soft);">— AI design partner via Figma MCP</span></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#case-currency" style="text-decoration:none; color:inherit; display:block; margin-top:60px;">
+      <div class="next-row" style="border-top:1px solid var(--line); padding-top:20px;">
+        <span class="eyebrow" style="color:var(--ink-faint);">Next case</span>
+        <span class="eyebrow">Currency Selector in Cashflow <span class="go">→</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CASE: CURRENCY SELECTOR ============ -->
+<section id="case-currency" class="sec">
+  <div class="wrap reveal">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+      <span class="eyebrow">Project 02</span>
+      <span class="eyebrow" style="color:var(--ink-faint);">Accountfy — 2024</span>
+    </div>
+    <h2 class="h2-sec" style="margin-top:14px;">Currency Selector in Cashflow</h2>
+    <p style="font-size:14px; color:var(--ink-soft); margin-top:8px; max-width:560px;">
+      Multi-currency treasury management, designed so finance directors never lose track of where a number came from.
+    </p>
+
+    <div class="process-track">
+      <div class="node is-active"><span class="dot"></span><span class="label">Challenge</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Process</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Decisions</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Outcome</span></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:6px;">
+      <div style="flex:1.15;">
+        <div class="eyebrow" style="color:var(--ink-faint);">Challenge</div>
+        <p style="font-size:13.3px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          Accountfy's cashflow module handled multiple currencies, but the existing interface
+          buried conversion context behind manual lookups. Finance directors managing
+          international operations needed to compare values across currencies without losing
+          track of the underlying exchange rate or which figures were already converted.
+        </p>
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:20px;">Process</div>
+        <p style="font-size:13.3px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          I mapped how finance teams actually scan a cashflow view — from totals to line items
+          and back — and tested currency-switching patterns that kept that scanning order
+          intact instead of forcing a full reload or a modal interruption.
+        </p>
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:20px;">Key decisions</div>
+        <div style="margin-top:14px;">
+          <div class="decision-item"><div class="idx">01</div><div class="txt"><b>Inline switching, not replacement</b> — the original entry stays visible next to the converted value, so the source of a number is never ambiguous.</div></div>
+          <div class="decision-item"><div class="idx">02</div><div class="txt"><b>A persistent rate indicator</b>, not a tooltip — the exchange rate is decision-relevant information, not a footnote.</div></div>
+          <div class="decision-item"><div class="idx">03</div><div class="txt"><b>View-scoped currency,</b> not account-scoped — comparing two markets never requires leaving the screen.</div></div>
+        </div>
+      </div>
+
+      <div style="flex:0 0 268px;">
+        <div class="device" style="height:330px;">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="screen" style="padding:14px;">
+            <div style="font-family:var(--font-mono); font-size:8.5px; letter-spacing:1px; color:var(--ink-faint); text-transform:uppercase;">Cash Flow Overview</div>
+            <div style="display:flex; gap:6px; margin-top:10px;">
+              <div style="flex:1; background:var(--paper); border-radius:6px; padding:8px;">
+                <div style="font-size:7px; color:var(--ink-faint);">BALANCE</div>
+                <div style="font-size:11px; font-weight:700; margin-top:3px;">R$2.4M</div>
+              </div>
+              <div style="flex:1; background:#e3f6ec; border-radius:6px; padding:8px;">
+                <div style="font-size:7px; color:#0e9b66;">INCOME</div>
+                <div style="font-size:11px; font-weight:700; margin-top:3px; color:#0e9b66;">+890K</div>
+              </div>
+              <div style="flex:1; background:#fdeceb; border-radius:6px; padding:8px;">
+                <div style="font-size:7px; color:#c0392b;">EXPENSE</div>
+                <div style="font-size:11px; font-weight:700; margin-top:3px; color:#c0392b;">-340K</div>
+              </div>
+            </div>
+            <div style="flex:1; margin-top:10px; background:var(--paper); border-radius:6px; padding:8px; display:flex; flex-direction:column;">
+              <div style="font-size:7px; color:var(--ink-faint);">MONTHLY CASH FLOW</div>
+              <svg viewBox="0 0 220 70" style="flex:1; width:100%; margin-top:4px;">
+                <polyline points="0,50 30,40 60,46 90,22 120,30 150,12 180,20 220,8" fill="none" stroke="#4b3fea" stroke-width="2.4"/>
+                <polyline points="0,60 30,55 60,58 90,44 120,48 150,36 180,40 220,30" fill="none" stroke="#c8c4f7" stroke-width="2"/>
+              </svg>
+            </div>
+            <div style="margin-top:10px; background:#11132a; border-radius:6px; padding:9px;">
+              <div style="font-size:7px; color:rgba(255,255,255,0.5);">EXCHANGE RATE</div>
+              <div style="font-size:10.5px; font-weight:700; color:#fff; margin-top:2px;">1 USD = 5.12 BRL</div>
+              <div style="display:flex; gap:5px; margin-top:8px;">
+                <span style="font-size:7px; background:#4b3fea; color:#fff; padding:3px 7px; border-radius:10px;">USD</span>
+                <span style="font-size:7px; background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.7); padding:3px 7px; border-radius:10px;">BRL</span>
+                <span style="font-size:7px; background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.7); padding:3px 7px; border-radius:10px;">EUR</span>
+                <span style="font-size:7px; background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.7); padding:3px 7px; border-radius:10px;">GBP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:18px;">
+          <div class="eyebrow" style="color:var(--ink-faint);">Outcome</div>
+          <p style="font-size:12px; line-height:1.6; color:var(--ink-soft); margin-top:8px;">
+            A cashflow view finance directors can trust at a glance — every number carries its
+            own currency context, and switching markets feels like changing a filter.
+          </p>
+        </div>
+        <div class="tag-row" style="margin-top:16px;">
+          <span class="tag">Fintech</span><span class="tag">Treasury</span><span class="tag">Interaction Design</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="#case-whitelabel" style="text-decoration:none; color:inherit; display:block; margin-top:60px;">
+      <div class="next-row" style="border-top:1px solid var(--line); padding-top:20px;">
+        <span class="eyebrow" style="color:var(--ink-faint);">Next case</span>
+        <span class="eyebrow">White Label BaaS Platform <span class="go">→</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CASE: WHITE LABEL BAAS ============ -->
+<section id="case-whitelabel" class="sec" style="background:#fafafe;">
+  <div class="wrap reveal">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+      <span class="eyebrow">Project 03</span>
+      <span class="eyebrow" style="color:var(--ink-faint);">Own Financial Services — 2021</span>
+    </div>
+    <h2 class="h2-sec" style="margin-top:14px;">White Label BaaS Platform</h2>
+    <p style="font-size:14px; color:var(--ink-soft); margin-top:8px; max-width:560px;">
+      Banking infrastructure that partner brands can make their own, without touching a line of code.
+    </p>
+
+    <div class="process-track">
+      <div class="node is-active"><span class="dot"></span><span class="label">Challenge</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Process</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Decisions</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Outcome</span></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:6px;">
+      <div style="flex:0 0 268px; order:1;">
+        <div class="device" style="height:300px;">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="screen" style="padding:14px;">
+            <div style="font-family:var(--font-mono); font-size:8.5px; letter-spacing:1px; color:var(--ink-faint); text-transform:uppercase;">Brand Identity</div>
+            <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+              <div style="width:30px; height:30px; border-radius:8px; background:#11132a; flex:none;"></div>
+              <div style="display:flex; gap:5px;">
+                <span style="width:16px;height:16px;border-radius:50%;background:#4b3fea;"></span>
+                <span style="width:16px;height:16px;border-radius:50%;background:#0e9b66;"></span>
+                <span style="width:16px;height:16px;border-radius:50%;background:#e0653f;"></span>
+                <span style="width:16px;height:16px;border-radius:50%;background:#11132a;"></span>
+              </div>
+            </div>
+            <div style="flex:1; margin-top:14px; background:var(--paper); border-radius:6px; padding:10px; display:flex; flex-direction:column;">
+              <div style="font-size:7px; color:var(--ink-faint);">LIVE PREVIEW — SAME COMPONENT, TWO BRANDS</div>
+              <div style="flex:1; display:flex; gap:8px; margin-top:8px;">
+                <div style="flex:1; background:#fff; border-radius:6px; padding:10px; display:flex; flex-direction:column; justify-content:space-between;">
+                  <div style="font-size:7px; color:var(--ink-faint);">Partner A</div>
+                  <div style="font-size:9px; font-weight:700; color:#11132a;">$ 4,820.00</div>
+                  <div style="background:#4b3fea; color:#fff; font-size:7px; text-align:center; border-radius:5px; padding:5px;">Transfer</div>
+                </div>
+                <div style="flex:1; background:#fff; border-radius:6px; padding:10px; display:flex; flex-direction:column; justify-content:space-between;">
+                  <div style="font-size:7px; color:var(--ink-faint);">Partner B</div>
+                  <div style="font-size:9px; font-weight:700; color:#11132a;">$ 4,820.00</div>
+                  <div style="background:#0e9b66; color:#fff; font-size:7px; text-align:center; border-radius:5px; padding:5px;">Transfer</div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:10px; background:#11132a; border-radius:6px; padding:9px; display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:7.5px; color:rgba(255,255,255,0.6);">Tokens propagate automatically</span>
+              <span style="font-size:7px; background:#4b3fea; color:#fff; padding:3px 8px; border-radius:10px;">Sync ✓</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:18px;">
+          <div class="eyebrow" style="color:var(--ink-faint);">Outcome</div>
+          <p style="font-size:12px; line-height:1.6; color:var(--ink-soft); margin-top:8px;">
+            New partner brands onboard by reconfiguring tokens, not rebuilding screens — the
+            design system became what scaled, not the bottleneck.
+          </p>
+        </div>
+        <div class="tag-row" style="margin-top:16px;">
+          <span class="tag">BaaS</span><span class="tag">White Label</span><span class="tag">Design Systems</span>
+        </div>
+      </div>
+
+      <div style="flex:1.15; order:2;">
+        <div class="eyebrow" style="color:var(--ink-faint);">Challenge</div>
+        <p style="font-size:13.3px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          Own's BaaS platform served multiple partner companies, each needing its own visual
+          identity layered over the same underlying banking infrastructure. Too much freedom and
+          the experience fragments into inconsistent, hard-to-maintain interfaces; too little and
+          the platform stops feeling like the partner's own product.
+        </p>
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:20px;">Process</div>
+        <p style="font-size:13.3px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          I led the move from hard-coded styles to a token-based architecture — separating what
+          a component does from how it looks, so brand identity became a configuration, not a
+          redesign.
+        </p>
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:20px;">Key decisions</div>
+        <div style="margin-top:14px;">
+          <div class="decision-item"><div class="idx">01</div><div class="txt"><b>Semantic tokens between primitives and components</b> — a partner's color, type, and spacing choices propagate everywhere automatically.</div></div>
+          <div class="decision-item"><div class="idx">02</div><div class="txt"><b>A constrained customization surface</b> — logo, palette, typography, a few layout variants — kept ownership without opening the door to usability regressions.</div></div>
+          <div class="decision-item"><div class="idx">03</div><div class="txt"><b>Documentation lived next to components</b> in Storybook, so engineering could ship new brands without designer involvement for routine cases.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#case-balance" style="text-decoration:none; color:inherit; display:block; margin-top:60px;">
+      <div class="next-row" style="border-top:1px solid var(--line); padding-top:20px;">
+        <span class="eyebrow" style="color:var(--ink-faint);">Next case</span>
+        <span class="eyebrow">Balance Unification App <span class="go">→</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CASE: BALANCE UNIFICATION ============ -->
+<section id="case-balance" class="sec">
+  <div class="wrap reveal">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+      <span class="eyebrow">Project 04</span>
+      <span class="eyebrow" style="color:var(--ink-faint);">Own Financial Services / Paketá — 2022</span>
+    </div>
+    <h2 class="h2-sec" style="margin-top:14px;">Balance Unification App</h2>
+    <p style="font-size:14px; color:var(--ink-soft); margin-top:8px; max-width:560px;">
+      One coherent financial picture, built from accounts that were never meant to talk to each other.
+    </p>
+
+    <div class="process-track">
+      <div class="node is-active"><span class="dot"></span><span class="label">Challenge</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Process</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Decisions</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Outcome</span></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:6px;">
+      <div style="flex:1.15;">
+        <div class="eyebrow" style="color:var(--ink-faint);">Challenge</div>
+        <p style="font-size:13.3px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          Users held several financial products under the same umbrella — checking, savings,
+          business accounts — but each lived in its own silo, with its own balance and its own
+          transaction history. The mobile experience needed to unify them without pretending
+          the underlying complexity wasn't there.
+        </p>
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:20px;">Process</div>
+        <p style="font-size:13.3px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          I worked from real transaction data to design a hierarchy that prioritized the number
+          people actually wanted first — total available balance — while keeping each account's
+          identity legible underneath it.
+        </p>
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:20px;">Key decisions</div>
+        <div style="margin-top:14px;">
+          <div class="decision-item"><div class="idx">01</div><div class="txt"><b>One unified balance up top,</b> with individual accounts always one tap away — never hidden behind a menu.</div></div>
+          <div class="decision-item"><div class="idx">02</div><div class="txt"><b>Transactions tagged by account of origin,</b> not merged into an undifferentiated feed, so users could still reason about where money moved.</div></div>
+          <div class="decision-item"><div class="idx">03</div><div class="txt"><b>Visual weight reserved for amounts and names</b> — icons and metadata recede so the numbers read first.</div></div>
+        </div>
+      </div>
+
+      <div style="flex:0 0 268px;">
+        <div class="device" style="height:330px; display:flex; align-items:center; justify-content:center;">
+          <div style="width:148px; height:298px; background:#0c0e1c; border-radius:22px; padding:7px; box-shadow:0 0 0 1px rgba(255,255,255,0.06);">
+            <div style="background:#fff; border-radius:16px; height:100%; overflow:hidden; display:flex; flex-direction:column;">
+              <div style="padding:10px 11px 6px;">
+                <div style="font-size:7px; color:var(--ink-faint);">Good afternoon</div>
+                <div style="font-size:9.5px; font-weight:700; color:var(--ink); margin-top:1px;">Maylla</div>
+              </div>
+              <div style="margin:0 9px; background:linear-gradient(135deg,#4b3fea,#7a6ff5); border-radius:10px; padding:10px;">
+                <div style="font-size:6.5px; color:rgba(255,255,255,0.7);">TOTAL AVAILABLE</div>
+                <div style="font-size:15px; font-weight:700; color:#fff; margin-top:2px;">R$ 15,420</div>
+              </div>
+              <div style="padding:9px 9px 0; font-size:6.5px; color:var(--ink-faint);">MY ACCOUNTS</div>
+              <div style="padding:5px 9px; display:flex; flex-direction:column; gap:5px;">
+                <div style="display:flex; justify-content:space-between; background:var(--paper); border-radius:6px; padding:6px 8px;">
+                  <span style="font-size:7px; color:var(--ink);">● Checking</span>
+                  <span style="font-size:7px; font-weight:700;">R$8,200</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; background:var(--paper); border-radius:6px; padding:6px 8px;">
+                  <span style="font-size:7px; color:var(--ink);">● Savings</span>
+                  <span style="font-size:7px; font-weight:700;">R$5,120</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; background:var(--paper); border-radius:6px; padding:6px 8px;">
+                  <span style="font-size:7px; color:var(--ink);">● Business</span>
+                  <span style="font-size:7px; font-weight:700;">R$2,100</span>
+                </div>
+              </div>
+              <div style="padding:8px 9px 0; font-size:6.5px; color:var(--ink-faint);">RECENT</div>
+              <div style="padding:5px 9px; flex:1; display:flex; flex-direction:column; gap:5px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:6.6px; color:var(--ink);">Well Payment <span style="color:var(--ink-faint);">· Checking</span></span>
+                  <span style="font-size:6.6px; color:#c0392b;">-2,300</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:6.6px; color:var(--ink);">Salary Deposit <span style="color:var(--ink-faint);">· Checking</span></span>
+                  <span style="font-size:6.6px; color:#0e9b66;">+8,200</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:6.6px; color:var(--ink);">Investment <span style="color:var(--ink-faint);">· Savings</span></span>
+                  <span style="font-size:6.6px; color:#c0392b;">-1,165</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:18px;">
+          <div class="eyebrow" style="color:var(--ink-faint);">Outcome</div>
+          <p style="font-size:12px; line-height:1.6; color:var(--ink-soft); margin-top:8px;">
+            The unified view became the default entry point to the app, replacing what had
+            been a confusing account-switcher as the very first thing users saw.
+          </p>
+        </div>
+        <div class="tag-row" style="margin-top:16px;">
+          <span class="tag">Mobile UX</span><span class="tag">BaaS</span><span class="tag">IA</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="#case-cora" style="text-decoration:none; color:inherit; display:block; margin-top:60px;">
+      <div class="next-row" style="border-top:1px solid var(--line); padding-top:20px;">
+        <span class="eyebrow" style="color:var(--ink-faint);">Next case</span>
+        <span class="eyebrow">Cora Workflow Automation <span class="go">→</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CASE: CORA WORKFLOW ============ -->
+<section id="case-cora" class="sec" style="background:#fafafe;">
+  <div class="wrap reveal">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+      <span class="eyebrow">Project 05</span>
+      <span class="eyebrow" style="color:var(--ink-faint);">Zup Innovation — 2017</span>
+    </div>
+    <h2 class="h2-sec" style="margin-top:14px;">Cora Workflow Automation</h2>
+    <p style="font-size:14px; color:var(--ink-soft); margin-top:8px; max-width:580px;">
+      A low-code decision engine that let non-technical teams build the automations engineers used to own. Adopted by Nextel and Santander.
+    </p>
+
+    <div class="process-track">
+      <div class="node is-active"><span class="dot"></span><span class="label">Challenge</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Process</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Decisions</span></div>
+      <div class="seg"></div>
+      <div class="node is-active"><span class="dot"></span><span class="label">Outcome</span></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:6px;">
+      <div style="flex:0 0 268px; order:1;">
+        <div class="device" style="height:330px;">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="screen" style="padding:14px; align-items:center;">
+            <div style="font-family:var(--font-mono); font-size:8.5px; letter-spacing:1px; color:var(--ink-faint); text-transform:uppercase; align-self:flex-start;">Workflow Builder</div>
+            <div style="flex:1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; margin-top:6px;">
+              <div style="background:#11132a; color:#fff; font-size:7.5px; border-radius:14px; padding:6px 14px;">New Application</div>
+              <div style="width:1px; height:10px; background:var(--line);"></div>
+              <div style="width:62px; height:62px; background:#efedfd; border:1.5px solid #4b3fea; border-radius:8px; transform:rotate(45deg); display:flex; align-items:center; justify-content:center;">
+                <span style="transform:rotate(-45deg); font-size:6.3px; text-align:center; color:#4b3fea; font-weight:700; line-height:1.2;">SCORE<br>≥ 700?</span>
+              </div>
+              <div style="width:1px; height:10px; background:var(--line);"></div>
+              <div style="display:flex; gap:18px;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                  <span style="font-size:6px; color:var(--ink-faint);">NO</span>
+                  <div style="background:#fdf3e3; color:#a8730f; font-size:7px; border-radius:12px; padding:6px 10px; white-space:nowrap;">Refer to review</div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                  <span style="font-size:6px; color:var(--ink-faint);">YES</span>
+                  <div style="background:#e3f6ec; color:#0e9b66; font-size:7px; border-radius:12px; padding:6px 10px; white-space:nowrap;">Approve credit</div>
+                  <div style="width:1px; height:8px; background:var(--line);"></div>
+                  <div style="background:#efedfd; color:#4b3fea; font-size:7px; border-radius:12px; padding:5px 10px; white-space:nowrap;">Notify partner</div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:10px; background:#11132a; border-radius:6px; padding:9px; width:100%; display:flex; justify-content:space-between;">
+              <div>
+                <div style="font-size:6.5px; color:rgba(255,255,255,0.5);">TRIGGER</div>
+                <div style="font-size:8.5px; font-weight:700; color:#fff; margin-top:2px;">Credit score</div>
+              </div>
+              <div>
+                <div style="font-size:6.5px; color:rgba(255,255,255,0.5);">CHANNEL</div>
+                <div style="font-size:8.5px; font-weight:700; color:#fff; margin-top:2px;">API + webhook</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:18px;">
+          <div class="eyebrow" style="color:var(--ink-faint);">Outcome</div>
+          <p style="font-size:12px; line-height:1.6; color:var(--ink-soft); margin-top:8px;">
+            Business teams at both institutions could ship and adjust their own automation
+            rules directly, cutting engineering out of the loop for routine changes.
+          </p>
+        </div>
+        <div class="tag-row" style="margin-top:16px;">
+          <span class="tag">Low-code</span><span class="tag">Automation</span><span class="tag">SaaS</span>
+        </div>
+      </div>
+
+      <div style="flex:1.15; order:2;">
+        <div class="eyebrow" style="color:var(--ink-faint);">Challenge</div>
+        <p style="font-size:13.3px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          Nextel and Santander needed to configure complex business rules and campaign logic
+          without filing a ticket with engineering every time a rule changed. The interface had
+          to make conditional logic — branches, thresholds, exceptions — legible to people who
+          had never written a line of code.
+        </p>
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:20px;">Process</div>
+        <p style="font-size:13.3px; line-height:1.7; color:var(--ink-soft); margin-top:10px;">
+          I treated the canvas itself as the documentation: instead of abstract form fields, the
+          workflow builder represented logic as a visual graph that mirrored how business users
+          already described their own rules out loud.
+        </p>
+        <div class="eyebrow" style="color:var(--ink-faint); margin-top:20px;">Key decisions</div>
+        <div style="margin-top:14px;">
+          <div class="decision-item"><div class="idx">01</div><div class="txt"><b>Plain-language conditions,</b> not technical operators — lowering the barrier for non-technical configuration.</div></div>
+          <div class="decision-item"><div class="idx">02</div><div class="txt"><b>Inline validation while building,</b> catching contradictory branches before publish instead of failing silently in production.</div></div>
+          <div class="decision-item"><div class="idx">03</div><div class="txt"><b>A canvas built for density</b> — scaling from a five-step rule to a sprawling decision tree without losing legibility, since dense flows were the norm for these clients.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#more-work" style="text-decoration:none; color:inherit; display:block; margin-top:60px;">
+      <div class="next-row" style="border-top:1px solid var(--line); padding-top:20px;">
+        <span class="eyebrow" style="color:var(--ink-faint);">More work</span>
+        <span class="eyebrow">Additional projects <span class="go">→</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ ADDITIONAL WORK ============ -->
+<section id="more-work" class="sec">
+  <div class="wrap reveal">
+    <span class="eyebrow">Additional work</span>
+    <h2 class="h2-sec" style="margin-top:14px; max-width:560px;">Earlier and lighter-weight projects.</h2>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin-top:10px; max-width:560px;">
+      Smaller in scope, but part of how the practice above was built.
+    </p>
+
+    <div style="margin-top:36px;">
+      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+          <h3 style="font-size:16.5px; font-weight:600;">República.org — UX Analysis</h3>
+          <span class="eyebrow" style="color:var(--ink-faint);">2022</span>
+        </div>
+        <p style="font-size:12.8px; line-height:1.65; color:var(--ink-soft); margin-top:8px; max-width:600px;">
+          Comprehensive UX audit identifying usability issues and proposing improvements to
+          navigation, information architecture, and content hierarchy for a nonprofit-sector platform.
+        </p>
+        <div class="tag-row" style="margin-top:10px;"><span class="tag">UX Audit</span><span class="tag">Web</span><span class="tag">Usability</span></div>
+      </div>
+
+      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+          <h3 style="font-size:16.5px; font-weight:600;">Blue Origen — Hypothesis Board</h3>
+          <span class="eyebrow" style="color:var(--ink-faint);">2021</span>
+        </div>
+        <p style="font-size:12.8px; line-height:1.65; color:var(--ink-soft); margin-top:8px; max-width:600px;">
+          Lean UX exploration mapping hypotheses — validated and invalidated — to align early
+          product bets with real user needs before any code was written.
+        </p>
+        <div class="tag-row" style="margin-top:10px;"><span class="tag">Lean UX</span><span class="tag">Research</span><span class="tag">Product Design</span></div>
+      </div>
+
+      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+          <h3 style="font-size:16.5px; font-weight:600;">Sysmarketing — Registration Flow</h3>
+          <span class="eyebrow" style="color:var(--ink-faint);">2020</span>
+        </div>
+        <p style="font-size:12.8px; line-height:1.65; color:var(--ink-soft); margin-top:8px; max-width:600px;">
+          Progressive-disclosure onboarding flow that broke a dense signup form into manageable
+          steps, reducing the chance of drop-off at first contact.
+        </p>
+        <div class="tag-row" style="margin-top:10px;"><span class="tag">UI/UX</span><span class="tag">Forms</span><span class="tag">Onboarding</span></div>
+      </div>
+
+      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+          <h3 style="font-size:16.5px; font-weight:600;">CRM White Label</h3>
+          <span class="eyebrow" style="color:var(--ink-faint);">Zup Innovation — 2017</span>
+        </div>
+        <p style="font-size:12.8px; line-height:1.65; color:var(--ink-soft); margin-top:8px; max-width:600px;">
+          Adaptable CRM interface serving financial and telecom clients, each with its own brand
+          skin layered over a shared underlying system.
+        </p>
+        <div class="tag-row" style="margin-top:10px;"><span class="tag">CRM</span><span class="tag">White Label</span><span class="tag">Telecom</span></div>
+      </div>
+
+      <div class="list-row" style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:22px 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+          <h3 style="font-size:16.5px; font-weight:600;">CRM Cliente Bancário</h3>
+          <span class="eyebrow" style="color:var(--ink-faint);">Zup Innovation — 2017</span>
+        </div>
+        <p style="font-size:12.8px; line-height:1.65; color:var(--ink-soft); margin-top:8px; max-width:600px;">
+          Banking-focused CRM built for support teams, integrating service history and account
+          metrics into a single customer timeline.
+        </p>
+        <div class="tag-row" style="margin-top:10px;"><span class="tag">CRM</span><span class="tag">Banking</span><span class="tag">Customer Service</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="sec" style="background:#fafafe;">
+  <div class="wrap reveal">
+    <span class="eyebrow">Skills &amp; expertise</span>
+    <h2 class="h2-sec" style="margin-top:14px;">The toolkit behind the work.</h2>
+
+    <div style="margin-top:32px;">
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+        <div style="flex:0 0 180px;" class="eyebrow">Design Tools</div>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">Figma, Sketch, Adobe XD, Storybook, Miro, FigJam</div>
+      </div>
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+        <div style="flex:0 0 180px;" class="eyebrow">UX Methods</div>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">User research, usability testing, journey mapping, interaction flows, wireframing, prototyping, design sprints, workshops</div>
+      </div>
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+        <div style="flex:0 0 180px;" class="eyebrow">Design Systems</div>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">Multi-brand / White Label systems, component libraries, design tokens, semantic token architecture, Tailwind CSS integration</div>
+      </div>
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+        <div style="flex:0 0 180px;" class="eyebrow">Technical</div>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">HTML/CSS, React basics, TypeScript, Tailwind CSS, Git, API literacy, Figma API scripting</div>
+      </div>
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+        <div style="flex:0 0 180px;" class="eyebrow">AI Integration</div>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">Anthropic Claude, AI-assisted design workflows, PRD crosschecks, component architecture decisions with AI as a technical execution partner</div>
+      </div>
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+        <div style="flex:0 0 180px;" class="eyebrow">Domains</div>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">Fintech, BaaS, White Label, treasury, payments, credit portals, digital banking, telecom, SaaS</div>
+      </div>
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:20px 12px; gap:30px;">
+        <div style="flex:0 0 180px;" class="eyebrow">Leadership</div>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">DesignOps, team mentoring, career development, stakeholder management, cross-functional collaboration</div>
+      </div>
+    </div>
+
+    <p style="font-size:11.5px; color:var(--ink-faint); margin-top:26px; max-width:600px; font-style:italic;">
+      Mockups throughout this portfolio are conceptual recreations built to respect NDAs in place
+      with former employers. Full visual case files are available on request.
+    </p>
+  </div>
+</section>
+
+<!-- ============ CLOSING / CONTACT ============ -->
+<section id="contact" class="on-dark sec" style="background:linear-gradient(150deg, var(--bg-deep) 0%, var(--bg-mid1) 38%, var(--bg-mid2) 68%, var(--bg-violet) 100%); color:#fff; overflow:hidden; padding-top:120px; padding-bottom:120px;">
+  <div class="deco-circle" style="width:340px;height:340px; bottom:-140px; right:-120px;"></div>
+  <div class="deco-circle" style="width:160px;height:160px; bottom:140px; right:60px;"></div>
+
+  <div class="wrap reveal">
+    <span class="pill-eyebrow">Let's talk</span>
+    <h1 style="font-size:clamp(30px,5.5vw,46px); font-weight:700; line-height:1.18; letter-spacing:-0.5px; margin-top:30px; max-width:640px;">
+      Let's design the next generation of digital products together.
+    </h1>
+    <div style="width:46px; height:2px; background:var(--accent-soft); margin:30px 0;"></div>
+
+    <div style="display:flex; gap:50px; flex-wrap:wrap;">
+      <div>
+        <div style="font-family:var(--font-mono); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.5);">Email</div>
+        <a href="mailto:mayllats@gmail.com" style="font-size:14px; margin-top:6px; display:inline-block; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.3); transition:border-color .2s ease;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'">mayllats@gmail.com</a>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.5);">LinkedIn</div>
+        <a href="https://linkedin.com/in/mayllasouza" style="font-size:14px; margin-top:6px; display:inline-block; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.3); transition:border-color .2s ease;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'">linkedin.com/in/mayllasouza</a>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.5);">Behance</div>
+        <a href="https://behance.net/mayllats" style="font-size:14px; margin-top:6px; display:inline-block; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.3); transition:border-color .2s ease;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'">behance.net/mayllats</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Maylla Souza — Portfolio 2026</footer>
+
 </body>
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el=>io.observe(el));
+</script>
 </html>
