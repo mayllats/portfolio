@@ -82,10 +82,12 @@
   }
   .nav-cta:hover{ background:var(--accent-soft); transform:translateY(-1px); }
   .nav-links-mobile-hide{ display:flex; gap:26px; }
+  @media (max-width:880px){
+    .nav-links-mobile-hide{ display:none !important; }
+  }
   @media (max-width:680px){
     .nav-mark{ font-size:12.5px; }
     .nav-links{ gap:12px; }
-    .nav-links-mobile-hide{ display:none !important; }
     .nav-cta{ font-size:9.5px; padding:7px 12px; }
   }
 
@@ -284,7 +286,7 @@
     </p>
     <p style="font-size:14.5px; line-height:1.75; color:var(--ink-soft); max-width:600px; margin-top:14px;">
       My approach pairs a solid foundation in process and project management — backed by an
-      MBA from FGV — with hands-on team leadership and global design system governance. I use
+      MBA from Estácio — with hands-on team leadership and global design system governance. I use
       an agile mindset to align complex stakeholders and keep delivery efficient, today
       augmented by AI-powered design workflows.
     </p>
@@ -1096,6 +1098,15 @@
       <div>
         <div style="font-family:var(--font-mono); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.5);">Behance</div>
         <a href="https://behance.net/mayllats" style="font-size:14px; margin-top:6px; display:inline-block; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.3); transition:border-color .2s ease;" onmouseover="this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'">behance.net/mayllats</a>
+      </div>
+    </div>
+
+    <div style="margin-top:46px; padding-top:30px; border-top:1px solid rgba(255,255,255,0.15);">
+      <div style="font-family:var(--font-mono); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:14px;">Downloads</div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="Portfolio_Maylla_Souza.pdf" class="contact-pill">Portfolio — PDF</a>
+        <a href="CV_Maylla_Souza_EN.pdf" class="contact-pill">CV — English</a>
+        <a href="CV_Maylla_Souza_PT.pdf" class="contact-pill">CV — Português</a>
       </div>
     </div>
   </div>
