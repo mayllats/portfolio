@@ -91,14 +91,6 @@
   }
   .nav-links a:hover{ color:#fff; }
   .nav-links a:hover::after{ width:100%; }
-  .nav-cta{
-    font-family:var(--font-mono); font-size:11px; letter-spacing:1px; text-transform:uppercase;
-    color:#fff; background:var(--accent); padding:9px 16px; border-radius:30px;
-    text-decoration:none; transition:background .2s ease, transform .2s ease;
-    white-space:nowrap; display:inline-block; line-height:1; vertical-align:middle;
-  }
-  .nav-cta:hover{ background:var(--accent-soft); transform:translateY(-1px); }
-  .cta-short{ display:none; }
   .nav-links-mobile-hide{ display:flex; gap:26px; }
   @media (max-width:880px){
     .nav-links-mobile-hide{ display:none !important; }
@@ -106,13 +98,10 @@
   @media (max-width:680px){
     .nav-mark{ font-size:12.5px; }
     .nav-links{ gap:8px; }
-    .nav-cta{ font-size:9.5px; padding:8px 12px; }
     .lang-switch{ padding:2px; }
     .lang-switch button{ padding:4px 8px; font-size:9px; }
   }
   @media (max-width:400px){
-    .cta-full{ display:none; }
-    .cta-short{ display:inline; }
     .nav-mark{ font-size:11px; }
     .nav-links{ gap:6px; }
   }
@@ -270,7 +259,6 @@
         <button type="button" class="lang-en-btn active" onclick="setLang('en')">EN</button>
         <button type="button" class="lang-pt-btn" onclick="setLang('pt')">PT</button>
       </div>
-      <a href="Portfolio_Maylla_Souza.pdf" class="nav-cta"><span class="i18n-en"><span class="cta-full">Download PDF</span><span class="cta-short">PDF</span></span><span class="i18n-pt"><span class="cta-full">Baixar PDF</span><span class="cta-short">PDF</span></span></a>
     </div>
   </div>
 </nav>
