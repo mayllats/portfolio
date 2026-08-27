@@ -26,6 +26,7 @@
     --font-mono:'DejaVu Sans Mono', 'Liberation Mono', 'SF Mono', Menlo, Consolas, monospace;
 
     --maxw: 920px;
+    --gutter: 28px;
   }
 
   *{ box-sizing:border-box; }
@@ -52,7 +53,13 @@
   .lang-switch button:hover:not(.active){ color:rgba(255,255,255,0.9); }
   img{ max-width:100%; }
 
-  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  .wrap{
+    width:100%;
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding-left:var(--gutter);
+    padding-right:var(--gutter);
+  }
   section{ position:relative; }
 
   /* ---------- reveal-on-scroll ---------- */
@@ -71,7 +78,9 @@
     border-bottom:1px solid rgba(255,255,255,0.08);
   }
   .nav-inner{
-    max-width:var(--maxw); margin:0 auto; padding:0 28px;
+    width:100%;
+    max-width:var(--maxw); margin:0 auto;
+    padding-left:var(--gutter); padding-right:var(--gutter);
     min-height:60px; display:flex; align-items:center; justify-content:space-between;
     flex-wrap:nowrap;
   }
@@ -221,12 +230,26 @@
   .deco-circle{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,0.14); }
   .deco-circle::after{ content:''; position:absolute; inset:18%; border-radius:50%; background:rgba(255,255,255,0.05); }
 
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .hero .wrap{
+    padding-top:80px;
+    padding-bottom:80px;
+  }
+
   /* ---------- responsive section paddings ---------- */
   .sec{ padding:90px 0; }
   .sec--tight{ padding:70px 0; }
   @media (max-width:680px){
     .sec{ padding:64px 0; }
     .sec--tight{ padding:50px 0; }
+    .hero .wrap{ padding-top:64px; padding-bottom:64px; }
+    :root{ --gutter: 20px; }
   }
 
   .grid-2{ display:flex; gap:30px; }
@@ -264,19 +287,19 @@
 </nav>
 
 <!-- ============ HERO ============ -->
-<section id="home" class="on-dark" style="min-height:100vh; display:flex; align-items:center; background:linear-gradient(150deg, var(--bg-deep) 0%, var(--bg-mid1) 38%, var(--bg-mid2) 68%, var(--bg-violet) 100%); color:#fff; overflow:hidden;">
+<section id="home" class="on-dark hero" style="background:linear-gradient(150deg, var(--bg-deep) 0%, var(--bg-mid1) 38%, var(--bg-mid2) 68%, var(--bg-violet) 100%); color:#fff; overflow:hidden;">
   <div class="deco-circle" style="width:300px;height:300px; top:80px; right:-70px;"></div>
   <div class="deco-circle" style="width:170px;height:170px; top:140px; right:160px;"></div>
   <div class="deco-circle" style="width:420px;height:420px; bottom:-200px; left:-160px;"></div>
 
-  <div class="wrap" style="padding-top:80px; padding-bottom:80px;">
+  <div class="wrap">
     <span class="pill-eyebrow"><span class="i18n-en">Portfolio — 2026</span><span class="i18n-pt">Portfólio — 2026</span></span>
     <h1 class="h1-hero" style="margin-top:26px;">Maylla<br>Souza</h1>
     <div style="font-family:var(--font-display); font-size:19px; font-weight:300; color:rgba(255,255,255,0.82); margin-top:18px;">
       <span class="i18n-en">Product Design Consultant</span><span class="i18n-pt">Consultora de Product Design</span>
     </div>
     <div style="width:46px; height:2px; background:var(--accent-soft); margin:26px 0;"></div>
-    <p style="font-size:14.5px; line-height:1.7; color:rgba(255,255,255,0.68); max-width:520px;">
+    <p style="font-size:14.5px; line-height:1.7; color:rgba(255,255,255,0.68); max-width:600px;">
       <span class="i18n-en">10+ years designing for fintech, Banking-as-a-Service, and multi-brand White Label platforms.
       Currently leading design system governance and hi-fi product design at a stealth startup,
       with AI-augmented workflows for scalable execution.</span>
@@ -1246,7 +1269,7 @@
     </p>
 
     <div style="margin-top:36px;">
-      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 12px;">
+      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 0;">
         <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
           <h3 style="font-size:16.5px; font-weight:600;">República.org — <span class="i18n-en">UX Analysis</span><span class="i18n-pt">Análise UX</span></h3>
           <span class="eyebrow" style="color:var(--ink-faint);">2022</span>
@@ -1258,7 +1281,7 @@
         <div class="tag-row" style="margin-top:10px;"><span class="tag"><span class="i18n-en">UX Audit</span><span class="i18n-pt">Auditoria UX</span></span><span class="tag">Web</span><span class="tag"><span class="i18n-en">Usability</span><span class="i18n-pt">Usabilidade</span></span></div>
       </div>
 
-      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 12px;">
+      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 0;">
         <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
           <h3 style="font-size:16.5px; font-weight:600;">Blue Origen — <span class="i18n-en">Hypothesis Board</span><span class="i18n-pt">Board de Hipóteses</span></h3>
           <span class="eyebrow" style="color:var(--ink-faint);">2021</span>
@@ -1270,7 +1293,7 @@
         <div class="tag-row" style="margin-top:10px;"><span class="tag">Lean UX</span><span class="tag"><span class="i18n-en">Research</span><span class="i18n-pt">Pesquisa</span></span><span class="tag">Product Design</span></div>
       </div>
 
-      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 12px;">
+      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 0;">
         <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
           <h3 style="font-size:16.5px; font-weight:600;">Sysmarketing — <span class="i18n-en">Registration Flow</span><span class="i18n-pt">Fluxo de Cadastro</span></h3>
           <span class="eyebrow" style="color:var(--ink-faint);">2020</span>
@@ -1282,7 +1305,7 @@
         <div class="tag-row" style="margin-top:10px;"><span class="tag">UI/UX</span><span class="tag"><span class="i18n-en">Forms</span><span class="i18n-pt">Formulários</span></span><span class="tag">Onboarding</span></div>
       </div>
 
-      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 12px;">
+      <div class="list-row" style="border-top:1px solid var(--line); padding:22px 0;">
         <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
           <h3 style="font-size:16.5px; font-weight:600;">CRM White Label</h3>
           <span class="eyebrow" style="color:var(--ink-faint);">Zup Innovation — 2017</span>
@@ -1294,7 +1317,7 @@
         <div class="tag-row" style="margin-top:10px;"><span class="tag">CRM</span><span class="tag">White Label</span><span class="tag">Telecom</span></div>
       </div>
 
-      <div class="list-row" style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:22px 12px;">
+      <div class="list-row" style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:22px 0;">
         <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
           <h3 style="font-size:16.5px; font-weight:600;">CRM <span class="i18n-en">Banking Client</span><span class="i18n-pt">Cliente Bancário</span></h3>
           <span class="eyebrow" style="color:var(--ink-faint);">Zup Innovation — 2017</span>
@@ -1316,31 +1339,31 @@
     <h2 class="h2-sec" style="margin-top:14px;"><span class="i18n-en">The toolkit behind the work.</span><span class="i18n-pt">O arsenal por trás do trabalho.</span></h2>
 
     <div style="margin-top:32px;">
-      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 0; gap:30px;">
         <div style="flex:0 0 180px;" class="eyebrow"><span class="i18n-en">Design Tools</span><span class="i18n-pt">Ferramentas de Design</span></div>
         <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">Figma, Sketch, Adobe XD, Storybook, Miro, FigJam</div>
       </div>
-      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 0; gap:30px;">
         <div style="flex:0 0 180px;" class="eyebrow"><span class="i18n-en">UX Methods</span><span class="i18n-pt">Métodos UX</span></div>
         <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;"><span class="i18n-en">User research, usability testing, journey mapping, interaction flows, wireframing, prototyping, design sprints, workshops</span><span class="i18n-pt">Pesquisa com usuários, testes de usabilidade, mapeamento de jornada, fluxos de interação, wireframing, prototipagem, design sprints, workshops</span></div>
       </div>
-      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 0; gap:30px;">
         <div style="flex:0 0 180px;" class="eyebrow"><span class="i18n-en">Design Systems</span><span class="i18n-pt">Design Systems</span></div>
         <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;"><span class="i18n-en">Multi-brand / White Label systems, component libraries, design tokens, semantic token architecture, Tailwind CSS integration</span><span class="i18n-pt">Sistemas multimarca / White Label, bibliotecas de componentes, design tokens, arquitetura de tokens semânticos, integração com Tailwind CSS</span></div>
       </div>
-      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 0; gap:30px;">
         <div style="flex:0 0 180px;" class="eyebrow"><span class="i18n-en">Technical</span><span class="i18n-pt">Técnico</span></div>
         <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;">HTML/CSS, React basics, TypeScript, Tailwind CSS, Git, API literacy, Figma API scripting</div>
       </div>
-      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 0; gap:30px;">
         <div style="flex:0 0 180px;" class="eyebrow"><span class="i18n-en">AI Integration</span><span class="i18n-pt">Integração com IA</span></div>
         <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;"><span class="i18n-en">Anthropic Claude, AI-assisted design workflows, PRD crosschecks, component architecture decisions with AI as a technical execution partner</span><span class="i18n-pt">Anthropic Claude, fluxos de design assistidos por IA, cruzamento de PRDs, decisões de arquitetura de componentes com IA como parceira técnica de execução</span></div>
       </div>
-      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 12px; gap:30px;">
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); padding:20px 0; gap:30px;">
         <div style="flex:0 0 180px;" class="eyebrow"><span class="i18n-en">Domains</span><span class="i18n-pt">Domínios</span></div>
         <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;"><span class="i18n-en">Fintech, BaaS, White Label, treasury, payments, credit portals, digital banking, telecom, SaaS</span><span class="i18n-pt">Fintech, BaaS, White Label, tesouraria, pagamentos, portais de crédito, banking digital, telecom, SaaS</span></div>
       </div>
-      <div class="list-row grid-2" style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:20px 12px; gap:30px;">
+      <div class="list-row grid-2" style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:20px 0; gap:30px;">
         <div style="flex:0 0 180px;" class="eyebrow"><span class="i18n-en">Leadership</span><span class="i18n-pt">Liderança</span></div>
         <div style="font-size:13px; color:var(--ink-soft); line-height:1.7;"><span class="i18n-en">DesignOps, team mentoring, career development, stakeholder management, cross-functional collaboration</span><span class="i18n-pt">DesignOps, mentoria de equipe, desenvolvimento de carreira, gestão de stakeholders, colaboração cross-funcional</span></div>
       </div>
